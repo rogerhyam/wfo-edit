@@ -14,13 +14,12 @@ class TaxonPath extends Component {
         if (ancestors && ancestors.length > 0) {
             return ancestors.map((ancestor) => (
                 <Breadcrumb.Item key={ancestor.wfo_id} href="#" onClick={(e) => { e.preventDefault(); navigateToItem(ancestor.wfo_id); }} >
-                    <ItemLabel itemData={ancestor} contractGenus={true} ></ItemLabel>
+                    <ItemLabel itemData={ancestor} contractGenus={true} includeSynonymBadge={true}></ItemLabel>
                 </Breadcrumb.Item>
             ));
         } else {
             return <Breadcrumb.Item>No Trail</Breadcrumb.Item>
         }
-
     }
 
     render() {

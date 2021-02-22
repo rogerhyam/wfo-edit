@@ -13,7 +13,7 @@ class ChildTaxa extends Component {
         if (children && children.length > 0) {
             return children.map((kid) => (
                 <ListGroup.Item action key={kid.wfo_id} onClick={(e) => { e.preventDefault(); navigateToItem(kid.wfo_id); }} >
-                    <ItemLabel itemData={kid} contractGenus={true} includeAuthors={true}></ItemLabel>
+                    <ItemLabel itemData={kid} contractGenus={true} includeAuthors={true} includeStatus={true}></ItemLabel>
                 </ListGroup.Item>
             ));
         } else {

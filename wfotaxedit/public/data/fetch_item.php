@@ -11,9 +11,23 @@ $item = get_item($wfo_id);
 
 // get the ancestors
 $ancestors = array();
-$ancestor = get_item($wfo_id);
+
+// I am my own first ancestor
 $ancestors[] = $item;
-$ancestor = $item;
+
+// if I am a synonym then my first parent is the accepted taxon
+if($item['accepted_wfo_id']){
+
+    $item['debug'] = "BANANANA";
+
+    // first ancestor becomes our accepted taxon
+    $accepted = get_item($item['accepted_wfo_id']);
+    $ancestors[] = $accepted;
+    $ancestor = $accepted;
+
+}else{   
+    $ancestor = $item;
+}
 
 while($ancestor = get_parent_item($ancestor)){
     $ancestors[] = $ancestor;

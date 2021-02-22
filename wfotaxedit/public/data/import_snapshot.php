@@ -149,8 +149,8 @@ while($row = fgetcsv($file, 2000, "\t")){
         "homotypicsynonym" => "checked",
         "heterotypicsynonym" => "checked",
         "unchecked" => "unchecked",
-        "doubtful" => "doubtful",
-        "ambiguous" => "doubtful",
+        "doubtful" => "ambiguous",
+        "ambiguous" => "ambiguous",
     );
 
     if(!array_key_exists($status, $status_map)) {

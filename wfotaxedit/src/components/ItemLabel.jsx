@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Badge from "react-bootstrap/Badge";
 
 class ItemLabel extends Component {
     constructor(props) {
@@ -8,7 +9,9 @@ class ItemLabel extends Component {
 
     render() {
 
-        const { itemData, contractGenus, includeAuthors } = this.props;
+        const { itemData, contractGenus, includeAuthors, includeStatus, includeSynonymBadge } = this.props;
+
+        if (!itemData) return "";
 
         let label;
 
@@ -23,32 +26,63 @@ class ItemLabel extends Component {
             authorship = " " + itemData.author_text;
         }
 
+        const badgeStyle = {
+            fontSize: "80%",
+            verticalAlign: "super"
+        };
+
+        let synonymBadge = "";
+        if (includeSynonymBadge && itemData.accepted_wfo_id && itemData.status === "checked") {
+            synonymBadge = <span style={badgeStyle} >{' '}<Badge pill variant="info">Syn</Badge></span>;
+        }
+
+        let statusBadge = "";
+        if (includeStatus) {
+            switch (itemData.status) {
+                case "checked":
+                    if (itemData.accepted_wfo_id) {
+                        statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="info" >S</Badge ></span>;
+                    } else {
+                        statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="success" >A</Badge ></span>;
+                    }
+                    break;
+                case "unchecked":
+                    statusBadge = <span style={badgeStyle} >{' '}<Badge pill variant="warning">U</Badge></span>;
+                    break;
+                case "ambiguous":
+                    statusBadge = <span style={badgeStyle} >{' '}<Badge pill variant="danger">A</Badge></span>;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         switch (itemData.rank) {
             // binomials
             case 'species':
-                label = <span className="wfo-name wfo-species"><i>{genus} {itemData.name}</i>{authorship}</span>;
+                label = <span className="wfo-name wfo-species"><i>{genus} {itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
                 break;
 
             // trinomials
             case 'subspecies':
-                label = <span className="wfo-name wfo-subspecies" ><i>{genus} {itemData.specificEpithet}</i> subsp. <i>{itemData.name}</i>{authorship}</span>;
+                label = <span className="wfo-name wfo-subspecies" ><i>{genus} {itemData.species}</i> subsp. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
                 break;
 
             case 'variety':
-                label = <span className="wfo-name wfo-variety" ><i>{genus} {itemData.specificEpithet}</i> var. <i>{itemData.name}</i>{authorship}</span>;
+                label = <span className="wfo-name wfo-variety" ><i>{genus} {itemData.species}</i> var. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
                 break;
 
             case 'form':
-                label = <span className="wfo-name wfo-form" ><i>{genus} {itemData.specificEpithet}</i> f. <i>{itemData.name}</i>{authorship}</span>;
+                label = <span className="wfo-name wfo-form" ><i>{genus} {itemData.species}</i> f. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
                 break;
 
             case 'genus':
-                label = <span className="wfo-name wfo-genus" ><i>{itemData.name}</i>{authorship}</span>;
+                label = <span className="wfo-name wfo-genus" ><i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
                 break;
 
             // mononomials
             default:
-                label = <span className="wfo-name wfo-mono" >{itemData.name}{authorship}</span>;
+                label = <span className="wfo-name wfo-mono" >{itemData.name}{authorship}{statusBadge}</span>;
                 break;
         }
 

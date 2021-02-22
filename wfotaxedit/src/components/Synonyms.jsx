@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import ItemLabel from "./ItemLabel";
 
 class Synonyms extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class Synonyms extends Component {
         if (synonyms && synonyms.length > 0) {
             return synonyms.map((syn) => (
                 <ListGroup.Item action key={syn.wfo_id} onClick={(e) => { e.preventDefault(); navigateToItem(syn.wfo_id); }} >
-                    {syn.name}
+                    <ItemLabel itemData={syn} contractGenus={true} includeAuthors={true}></ItemLabel>
                 </ListGroup.Item>
             ));
         } else {

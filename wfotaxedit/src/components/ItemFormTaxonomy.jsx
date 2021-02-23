@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import ItemFormTaxonomyStatus from "./ItemFormTaxonomyStatus";
 import ListGroup from "react-bootstrap/ListGroup";
-import LinkItemDialogue from "./LinkItemDialogue";
+import LinkItem from "./LinkItem";
 
 class ItemFormTaxonomy extends Component {
 
@@ -27,7 +27,7 @@ class ItemFormTaxonomy extends Component {
                 <Card.Body>
                     <ItemFormTaxonomyStatus status={item.getStatus()} setStatus={item.setStatus} />
                     <ListGroup>
-                        <LinkItemDialogue
+                        <LinkItem
                             show={true}
                             title={title}
                             setPickedItem={item.setParentData}

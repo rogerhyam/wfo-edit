@@ -138,6 +138,7 @@ while($row = fgetcsv($file, 2000, "\t")){
     $data['parent_wfo_id'] = trim($row[ array_search('parentNameUsageID',$fields) ]);
 
     // accepted name if synonym
+    // FIXME: This has gone
     $data['accepted_wfo_id'] = trim($row[ array_search('acceptedNameUsageID',$fields) ]);
 
     // status

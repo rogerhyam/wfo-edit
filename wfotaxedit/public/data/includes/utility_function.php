@@ -26,7 +26,7 @@ function get_children($item){
     
     $kids = array();
 
-    $response = $mysqli->query("SELECT * from items WHERE parent_wfo_id = '{$item['wfo_id']}' order by name");
+    $response = $mysqli->query("SELECT * from items WHERE parent_wfo_id = '{$item['wfo_id']}' and `status` != 'synonym' order by name");
     while($kid = $response->fetch_assoc()){
         $kids[] = $kid;
     }
@@ -38,7 +38,7 @@ function get_synonyms($item){
     
     $syns = array();
 
-    $response = $mysqli->query("SELECT * from items WHERE accepted_wfo_id = '{$item['wfo_id']}' order by name");
+    $response = $mysqli->query("SELECT * from items WHERE parent_wfo_id = '{$item['wfo_id']}' and `status` = 'synonym' order by name");
     while($syn = $response->fetch_assoc()){
         $syns[] = $syn;
     }

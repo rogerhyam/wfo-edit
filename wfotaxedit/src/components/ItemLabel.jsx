@@ -32,19 +32,18 @@ class ItemLabel extends Component {
         };
 
         let synonymBadge = "";
-        if (includeSynonymBadge && itemData.accepted_wfo_id && itemData.status === "checked") {
+        if (includeSynonymBadge && itemData.status === "synonym") {
             synonymBadge = <span style={badgeStyle} >{' '}<Badge pill variant="info">Syn</Badge></span>;
         }
 
         let statusBadge = "";
         if (includeStatus) {
             switch (itemData.status) {
-                case "checked":
-                    if (itemData.accepted_wfo_id) {
-                        statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="info" >S</Badge ></span>;
-                    } else {
-                        statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="success" >A</Badge ></span>;
-                    }
+                case "accepted":
+                    statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="success" >A</Badge ></span>;
+                    break;
+                case "synonym":
+                    statusBadge = <span style={badgeStyle} >{' '}< Badge pill variant="info" >S</Badge ></span>;
                     break;
                 case "unchecked":
                     statusBadge = <span style={badgeStyle} >{' '}<Badge pill variant="warning">U</Badge></span>;

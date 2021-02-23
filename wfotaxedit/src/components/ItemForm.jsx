@@ -1,13 +1,13 @@
 
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ItemFormName from "./ItemFormName";
 import ItemFormAuthors from "./ItemFormAuthors";
 import ItemFormProtologue from "./ItemFormProtologue";
 import ItemFormTaxonomy from "./ItemFormTaxonomy";
-import LinkItemDialogue from "./LinkItemDialogue";
+import ItemFormBasionym from "./ItemFormBasionym";
+import ItemFormCommit from "./ItemFormCommit";
 
 class ItemForm extends Component {
 
@@ -27,33 +27,9 @@ class ItemForm extends Component {
                 <ItemFormName item={this.props.item} />
                 <ItemFormAuthors item={this.props.item} />
                 <ItemFormProtologue item={this.props.item} />
-
-                <Card style={{ marginTop: "1em" }}>
-                    <Card.Header>Basionym</Card.Header>
-                    <Card.Body>
-                        <a href="dsffdsdsaf">Fixme: Link to Basionym</a>
-                        <LinkItemDialogue />
-                    </Card.Body>
-                </Card>
-
+                <ItemFormBasionym item={this.props.item} />
                 <ItemFormTaxonomy item={this.props.item} />
-
-                <Card style={{ marginTop: "1em" }}>
-                    <Card.Header>Commit</Card.Header>
-                    <Card.Body>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Editorial Comments</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Save
-        </Button>
-
-                    </Card.Body>
-                </Card>
-
-
+                <ItemFormCommit item={this.props.item} />
 
                 <Card style={{ marginTop: "1em" }}>
                     <Card.Header>Previous Versions</Card.Header>

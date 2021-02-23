@@ -14,20 +14,7 @@ $ancestors = array();
 
 // I am my own first ancestor
 $ancestors[] = $item;
-
-// if I am a synonym then my first parent is the accepted taxon
-if($item['accepted_wfo_id']){
-
-    $item['debug'] = "BANANANA";
-
-    // first ancestor becomes our accepted taxon
-    $accepted = get_item($item['accepted_wfo_id']);
-    $ancestors[] = $accepted;
-    $ancestor = $accepted;
-
-}else{   
-    $ancestor = $item;
-}
+$ancestor = $item;
 
 while($ancestor = get_parent_item($ancestor)){
     $ancestors[] = $ancestor;
@@ -40,6 +27,11 @@ $item['children'] = get_children($item);
 
 // and the synonyms
 $item['synonyms'] = get_synonyms($item);
+
+// and the basionym
+if($item['basionym_wfo_id']){
+    $item['basionym'] = get_item($item['basionym_wfo_id']);
+}
 
 header('Content-Type: application/json');
 echo json_encode($item);

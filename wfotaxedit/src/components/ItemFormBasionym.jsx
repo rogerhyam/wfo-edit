@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import LinkItemDialogue from "./LinkItemDialogue";
+import LinkItem from "./LinkItem";
 
 class ItemFormAuthorsText extends Component {
 
@@ -20,7 +20,7 @@ class ItemFormAuthorsText extends Component {
                 <Card.Header>Basionym</Card.Header>
                 <Card.Body>
                     <ListGroup>
-                        <LinkItemDialogue
+                        <LinkItem
                             show={true}
                             title="Basionym"
                             setPickedItem={item.setBasionymData}

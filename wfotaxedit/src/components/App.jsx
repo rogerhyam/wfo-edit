@@ -2,9 +2,6 @@ import '../App.css';
 import React, { Component } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,6 +11,7 @@ import TaxonPath from "./TaxonPath";
 import ItemRender from "./ItemRender";
 import Item from "./Item";
 import ItemForm from "./ItemForm";
+import SearchButton from "./SearchButton";
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -67,10 +65,7 @@ class App extends Component {
               <Nav.Link href="#link">Classification</Nav.Link>
               <Nav.Link href="#link">Logout</Nav.Link>
             </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            <SearchButton navigateToItem={this.navigateToItem} />
           </Navbar.Collapse>
         </Navbar>
 

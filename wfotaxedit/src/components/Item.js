@@ -33,8 +33,14 @@ class Item {
         this.authorsText = data.author_text;
         this.protologueText = data.protologue_text;
         this.status = data.status;
-
+        this.setParentWfoId(data.parent_wfo_id);
         this.hasChanged();
+
+        // load the basionym
+        this.basionymWfoId = data.basionym_wfo_id;
+        this.basionymData = data.basionym;
+
+
       }
 
       );
@@ -104,31 +110,71 @@ class Item {
     this.hasChanged();
   }
 
-  getStatus = () => {
+  setParentWfoId = (newParentWfoId) => {
 
-    if (!this.data) return "";
+    // efficiency check as this might cause another http call
+    if (this.parentWfoId === newParentWfoId) return;
 
-    if (this.status === "checked") {
-      if (this.data.accepted_wfo_id) {
-        return "synonym";
-      } else {
-        return "accepted";
+    this.parentWfoId = newParentWfoId;
+
+    // parent should be in the ancestors list.
+    this.data.ancestors.map((ancestor) => {
+      if (ancestor.wfo_id === newParentWfoId) {
+        this.parentData = ancestor;
+        this.hasChanged();
+        return ancestor;
       }
-    } else {
-      return this.status;
-    }
+      return null;
+    });
+
+    // could try and do a call to load it here
+    // if we haven't got it but I can't think
+    // of a situation where we wouldn't.
+
+    this.hasChanged();
 
   }
 
-  setStatus = (newStatus) => {
+  getParentWfoId = () => {
+    return this.parentWfoId ? this.parentWfoId : "";
+  }
 
-    if (newStatus === "synonym" || newStatus === "accepted") {
-      this.status = "checked";
-    } else {
-      this.status = newStatus;
-    }
+  setParentData = (newParentData) => {
+    this.parentData = newParentData;
+    this.parentWfoId = newParentData.wfo_id;
     this.hasChanged();
+  }
 
+  getParentData = () => {
+    return this.parentData ? this.parentData : "";
+  }
+
+  getBasionymData = () => {
+    return this.basionymData ? this.basionymData : "";
+  }
+
+  setBasionymData = (basionymData) => {
+    this.basionymData = basionymData;
+    this.basionymWfoId = basionymData.wfo_id;
+    this.hasChanged();
+  }
+
+  getStatus = () => {
+    return this.status ? this.status : "";
+  }
+
+  setStatus = (newStatus) => {
+    this.status = newStatus;
+    this.hasChanged();
+  }
+
+  getComment() {
+    return this.comment ? this.comment : "";
+  }
+
+  setComment = (newComment) => {
+    this.comment = newComment;
+    this.hasChanged();
   }
 
 }

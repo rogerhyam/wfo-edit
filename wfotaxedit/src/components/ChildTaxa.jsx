@@ -29,7 +29,7 @@ class ChildTaxa extends Component {
 
 
         return (
-            <Card style={{ marginTop: "1em" }}>
+            <Card className="wfo-child-list" style={{ marginTop: "1em" }}>
                 <Card.Header>Child Taxa</Card.Header>
                 <Card.Body>
                     <ListGroup>

@@ -25,7 +25,7 @@ class Synonyms extends Component {
     render() {
         const { synonyms, navigateToItem } = this.props;
         return (
-            <Card style={{ marginTop: "1em" }}>
+            <Card className="wfo-synonym-list" style={{ marginTop: "1em" }}>
                 <Card.Header>Synonyms</Card.Header>
                 <Card.Body>
                     <ListGroup>

@@ -71,8 +71,13 @@ class ItemRender extends Component {
       <Card style={{ marginTop: "1em" }}>
         <Card.Body>
           {statusBadge}
+          {" "}
+          <a href={`http://www.worldfloraonline.org/taxon/${item.wfoId}`}><Badge variant="secondary">{item.wfoId}</Badge></a>
+          {" "}
+          <a href={`http://www.worldfloraonline.org/taxon/${item.wfoId}`}><Badge variant="secondary">IPNI:</Badge></a>
+
           <h2 style={{ marginTop: "0.3em" }}>{label}</h2>
-          <p>{item.wfoId}</p>
+          <p></p>
         </Card.Body>
       </Card>
     );

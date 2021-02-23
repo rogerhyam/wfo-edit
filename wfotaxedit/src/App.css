@@ -1,0 +1,16 @@
+.wfo-item-label .list-group{
+    max-height: 400px;
+    min-height: 400px;
+    margin-bottom: 10px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.wfo-child-list .list-group,
+.wfo-synonym-list .list-group{
+    max-height: 600px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    overflow-y:auto;
+    overflow-x:hidden;
+}

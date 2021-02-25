@@ -11,6 +11,24 @@ class ItemFormAuthorsText extends Component {
         this.state = {};
     }
 
+    getSuggestedTerms = () => {
+
+        const item = this.props.item;
+
+        if (!item) return "";
+
+        let suggest = item.getName();
+
+        // add the bit between the brackets
+        const parts = /\((.*)\)/.exec(item.getAuthorsText());
+        if (parts && parts[1]) {
+            suggest += " " + parts[1];
+        }
+
+        return suggest;
+
+    }
+
     render() {
 
         const { item } = this.props;

@@ -53,3 +53,16 @@ function sanity_check_wfo_id($wfo_id){
         exit;
     }
 }
+
+function get_assignments($user_id){
+
+    global $mysqli;
+
+    $assignments = array();
+    $result = $mysqli->query("SELECT * FROM assignments as a join items as i on a.wfo_id = i.wfo_id where a.user_id = " . $user_id);
+    while($row = $result->fetch_assoc()){
+        $assignments[] = $row;
+    }
+    return $assignments;
+
+}

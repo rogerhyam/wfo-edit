@@ -20,7 +20,7 @@ class ItemFormProtologue extends Component {
                 <Card.Header>Protologue</Card.Header>
                 <Card.Body>
                     <ItemFormProtologueText protologueText={item.getProtologueText()} setProtologueText={item.setProtologueText} />
-                    <a href="dsffdsdsaf">Fixme: Link to publication</a>
+                    <p>FIXME: Link to publication</p>
                 </Card.Body>
             </Card>
         );

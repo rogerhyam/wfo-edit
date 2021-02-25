@@ -19,8 +19,6 @@ class ItemFormTaxonomy extends Component {
         let title = "Parent Taxon";
         if (item.status === "synonym") title = "Accepted Taxon";
 
-        console.log(item.getParentData());
-
         return (
             <Card style={{ marginTop: "1em" }}>
                 <Card.Header>Taxonomy</Card.Header>

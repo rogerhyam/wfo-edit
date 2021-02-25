@@ -9,7 +9,7 @@ class ItemLabel extends Component {
 
     render() {
 
-        const { itemData, contractGenus, includeAuthors, includeStatus, includeSynonymBadge } = this.props;
+        const { itemData, contractGenus, includeAuthors, includeStatus, includeSynonymBadge, includeEditable } = this.props;
 
         if (!itemData) return "";
 
@@ -56,32 +56,39 @@ class ItemLabel extends Component {
             }
         }
 
+        let editBadge = "";
+        if (includeEditable) {
+            if (itemData.can_edit) {
+                editBadge = <span style={badgeStyle} >{' '}<Badge pill variant="secondary">E</Badge></span>;
+            }
+        }
+
         switch (itemData.rank) {
             // binomials
             case 'species':
-                label = <span className="wfo-name wfo-species"><i>{genus} {itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-species"><i>{genus} {itemData.name}</i>{authorship}{synonymBadge}{statusBadge}{editBadge}</span>;
                 break;
 
             // trinomials
             case 'subspecies':
-                label = <span className="wfo-name wfo-subspecies" ><i>{genus} {itemData.species}</i> subsp. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-subspecies" ><i>{genus} {itemData.species}</i> subsp. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}{editBadge}</span>;
                 break;
 
             case 'variety':
-                label = <span className="wfo-name wfo-variety" ><i>{genus} {itemData.species}</i> var. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-variety" ><i>{genus} {itemData.species}</i> var. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}{editBadge}</span>;
                 break;
 
             case 'form':
-                label = <span className="wfo-name wfo-form" ><i>{genus} {itemData.species}</i> f. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-form" ><i>{genus} {itemData.species}</i> f. <i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}{editBadge}</span>;
                 break;
 
             case 'genus':
-                label = <span className="wfo-name wfo-genus" ><i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-genus" ><i>{itemData.name}</i>{authorship}{synonymBadge}{statusBadge}{editBadge}</span>;
                 break;
 
             // mononomials
             default:
-                label = <span className="wfo-name wfo-mono" >{itemData.name}{authorship}{statusBadge}</span>;
+                label = <span className="wfo-name wfo-mono" >{itemData.name}{authorship}{statusBadge}{editBadge}</span>;
                 break;
         }
 

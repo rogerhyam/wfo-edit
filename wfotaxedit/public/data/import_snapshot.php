@@ -51,6 +51,7 @@ $file = fopen($file_path, "r");
 
 if($file === FALSE){
     echo "Couldn't open file: $file_path\n";
+    exit;
 }
 
 // get the column titles
@@ -134,24 +135,37 @@ while($row = fgetcsv($file, 2000, "\t")){
     $data['ipni_name_id'] = trim($row[ array_search('scientificNameID',$fields) ]);
     $data['legacy_references'] = trim($row[ array_search('references',$fields) ]);
 
-    // parent name 
-    $data['parent_wfo_id'] = trim($row[ array_search('parentNameUsageID',$fields) ]);
+    $parent_wfo_id = trim($row[ array_search('parentNameUsageID',$fields) ]);
+    $accepted_wfo_id = trim($row[ array_search('acceptedNameUsageID',$fields) ]);
 
-    // accepted name if synonym
-    // FIXME: This has gone
-    $data['accepted_wfo_id'] = trim($row[ array_search('acceptedNameUsageID',$fields) ]);
+    // we combine these two fields because they are mutually exclusive.
+    if($parent_wfo_id && !$accepted_wfo_id){
+        $data['parent_wfo_id'] = $parent_wfo_id;
+    }else if(!$parent_wfo_id && $accepted_wfo_id){
+        $data['parent_wfo_id'] = $accepted_wfo_id;
+    }else if(!$parent_wfo_id && !$accepted_wfo_id){
+        $data['parent_wfo_id'] = null;
+    }else{
+        echo "\nError: We have both a parent_id and an accepted_id $parent_wfo_id:$accepted_wfo_id \n";
+        echo "This is verboten!\n";
+        echo "Line: $line_count\n";
+        print_r($row);
+        print_r($fields);
+        exit;
+    }
 
     // status
     $status = trim($row[ array_search('taxonomicStatus',$fields) ]);
     $status = strtolower($status);
     $status_map = array(
-        "accepted" => "checked",
-        "synonym" => "checked",
-        "homotypicsynonym" => "checked",
-        "heterotypicsynonym" => "checked",
+        "accepted" => "accepted",
+        "synonym" => "synonym",
+        "homotypicsynonym" => "synonym",
+        "heterotypicsynonym" => "synonym",
         "unchecked" => "unchecked",
         "doubtful" => "ambiguous",
         "ambiguous" => "ambiguous",
+        "" => "unchecked"
     );
 
     if(!array_key_exists($status, $status_map)) {
@@ -160,6 +174,14 @@ while($row = fgetcsv($file, 2000, "\t")){
     }
     $data['status'] = $status_map[$status];
 
+    // null those empty string fields
+    foreach($data as $key => $value){
+        if(is_string($value) && strlen($value) == 0) $data[$key] = null;
+    }
+
+    // but name can't be null
+    if($data['name'] == null) $data['name'] = 'NO NAME';
+
     $row_id = false;
     $stmt = $mysqli->prepare("SELECT id FROM items WHERE wfo_id = ?");
     $stmt->bind_param("s", $data['wfo_id']);
@@ -167,12 +189,12 @@ while($row = fgetcsv($file, 2000, "\t")){
     $stmt->bind_result($row_id);
     $stmt->fetch();
     $stmt->close();
-
-    echo "\nROW $row_id\n";
     
     if($row_id){
 
         // we are in update land
+/*
+
         $sql = "UPDATE items SET
             `rank` = ?,
             `genus` = ?,
@@ -183,15 +205,18 @@ while($row = fgetcsv($file, 2000, "\t")){
             `ipni_name_id` = ?,
             `legacy_references` = ?,
             `parent_wfo_id` = ?,
-            `accepted_wfo_id` = ?,
             `status` = ?
             WHERE id = ?
             ";
-        echo "\n$sql\n";
         $stmt = $mysqli->prepare($sql);
-        echo $mysqli->error;
+        if($mysqli->error){
+            echo "\n$sql\n";
+            echo $mysqli->error;
+            exit;
+        }
+      
         $stmt->bind_param(
-            "sssssssssssi",
+            "ssssssssssi",
             $data['rank'],
             $data['genus'],
             $data['name'],
@@ -201,25 +226,32 @@ while($row = fgetcsv($file, 2000, "\t")){
             $data['ipni_name_id'],
             $data['legacy_references'],
             $data['parent_wfo_id'],
-            $data['accepted_wfo_id'],
             $data['status'],
             $row_id
         );
         $stmt->execute();
+        if($mysqli->error){
+           print_r($data);
+            echo $mysqli->error;
+        exit;
+        }
         $stmt->close();
-
+*/
     }else{
 
         // we are in insert land
         $sql = "INSERT INTO items 
-            (`wfo_id`, `rank`, `genus`, `name`, `species`, `author_text`, `protologue_text`, `ipni_name_id`, `legacy_references`, `parent_wfo_id`, `accepted_wfo_id`, `status`) 
+            (`wfo_id`, `rank`, `genus`, `name`, `species`, `author_text`, `protologue_text`, `ipni_name_id`, `legacy_references`, `parent_wfo_id`, `status`) 
             VALUES 
-            (?,?,?,?,?,?,?,?,?,?,?,?)";
-        //echo "\n$sql\n";
+            (?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $mysqli->prepare($sql);
-        echo $mysqli->error;
+        if($mysqli->error){
+            echo "\n$sql\n";
+            echo $mysqli->error;
+            exit;
+        }
         $stmt->bind_param(
-            "ssssssssssss",
+            "sssssssssss",
             $data['wfo_id'],
             $data['rank'],
             $data['genus'],
@@ -230,10 +262,14 @@ while($row = fgetcsv($file, 2000, "\t")){
             $data['ipni_name_id'],
             $data['legacy_references'],
             $data['parent_wfo_id'],
-            $data['accepted_wfo_id'],
             $data['status']
         );
         $stmt->execute();
+        if($mysqli->error){
+            print_r($data);
+            echo $mysqli->error;
+            exit;
+        }
         $stmt->close();
  
     }
@@ -241,9 +277,17 @@ while($row = fgetcsv($file, 2000, "\t")){
     // got a nice data object that should match the fields in the db.
 
 
-   print_r($data);
+//   print_r($data);
 
    $line_count++;
+
+    // nice progress display
+    $display_length = 10;
+    echo str_repeat(chr(8), $display_length); // rewind
+    echo str_repeat(" ", $display_length); // blank
+    echo str_repeat(chr(8), $display_length); // rewind
+    echo str_pad(number_format($line_count), $display_length);
+
    // if($line_count > 15) break;
    //if ($data['rank'] == 'variety') break;
 

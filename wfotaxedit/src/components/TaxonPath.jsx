@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import ItemLabel from "./ItemLabel";
+import Spinner from "react-bootstrap/Spinner";
 
 
 class TaxonPath extends Component {
@@ -25,8 +26,15 @@ class TaxonPath extends Component {
     render() {
 
         const { ancestors, navigateToItem } = this.props;
-
-        if (!ancestors) return "";
+        if (!ancestors) {
+            return (
+                <Breadcrumb style={{ marginTop: "1em" }} >
+                    <Breadcrumb.Item>
+                        <Spinner animation="border" size="sm" />
+                    </Breadcrumb.Item>
+                </Breadcrumb >
+            );
+        };
 
         return (<Breadcrumb style={{ marginTop: "1em" }} >
             {this.renderPath(ancestors, navigateToItem)}

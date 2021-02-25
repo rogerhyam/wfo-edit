@@ -28,7 +28,7 @@ class LinkItem extends Component {
     getItemLabel = () => {
 
         if (this.props.itemData) {
-            return <a href={"#" + this.props.itemData.wfo_id}><ItemLabel itemData={this.props.itemData} includeAuthors={true} /></a >;
+            return <a href={"#" + this.props.itemData.wfo_id}><ItemLabel itemData={this.props.itemData} includeAuthors={true} includeStatus={true} /></a >;
         } else {
             return "Not set";
         }
@@ -52,7 +52,8 @@ class LinkItem extends Component {
                     setPickedItem={this.handleItemPicked}
                     itemData={itemData}
                     title={title}
-                    show={this.state.show} />
+                    show={this.state.show}
+                />
             </ListGroup.Item>
         );
     }

@@ -85,7 +85,11 @@ class SearchItemDialogue extends Component {
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="search">
-                            <Form.Control type="text" placeholder="Type the name or WFO ID" onChange={this.handleSearchTermChange} />
+                            <Form.Control
+                                type="text"
+                                placeholder="Type the name or WFO ID"
+                                onChange={this.handleSearchTermChange}
+                            />
                         </Form.Group>
                         <ListGroup >
                             {this.getOptions()}

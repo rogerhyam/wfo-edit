@@ -21,7 +21,7 @@ class ItemFormName extends Component {
             <Card style={{ marginTop: "1em" }}>
                 <Card.Header>Name Composition</Card.Header>
                 <Card.Body>
-                    <ItemFormNameRank rank={item.getRank()} setRank={item.setRank} />
+                    <ItemFormNameRank ranks={item.ranks} rank={item.getRank()} setRank={item.setRank} />
                     <ItemFormNameName name={item.getName()} setName={item.setName} />
                     <ItemFormNameSpecificEpithet rank={item.getRank()} specificEpithet={item.getSpecificEpithet()} setSpecificEpithet={item.setSpecificEpithet} />
                     <ItemFormNameGenus rank={item.getRank()} genus={item.getGenus()} setGenus={item.setGenus} />

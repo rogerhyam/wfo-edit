@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
+import Spinner from "react-bootstrap/Spinner";
 
 
 class ItemRender extends Component {
@@ -13,7 +14,15 @@ class ItemRender extends Component {
     const { item } = this.props;
 
     // don't display if we don't have an item.
-    if (!item || !item.data) return '';
+    if (!item || !item.data) {
+      return (
+        <Card style={{ marginTop: "1em" }}>
+          <Card.Body>
+            <Spinner animation="border" size="lg" />
+          </Card.Body>
+        </Card>
+      );
+    };
 
     let statusBadge = "";
     switch (item.getStatus()) {
@@ -31,6 +40,16 @@ class ItemRender extends Component {
         break;
       default:
         break;
+    }
+
+    let ipniBadge = "";
+    if (item.getIpniNameId()) {
+      ipniBadge = <a target="ipni" href={`https://www.ipni.org/n/${item.getIpniNameId()}`}><Badge variant="secondary">IPNI:{item.getIpniNameId()}</Badge></a>;
+    }
+
+    let editableBadge = "";
+    if (!item.isEditable()) {
+      editableBadge = <Badge variant="danger">Read Only</Badge>
     }
 
     const authorStyle = {
@@ -70,14 +89,21 @@ class ItemRender extends Component {
     return (
       <Card style={{ marginTop: "1em" }}>
         <Card.Body>
-          {statusBadge}
-          {" "}
-          <a href={`http://www.worldfloraonline.org/taxon/${item.wfoId}`}><Badge variant="secondary">{item.wfoId}</Badge></a>
-          {" "}
-          <a href={`http://www.worldfloraonline.org/taxon/${item.wfoId}`}><Badge variant="secondary">IPNI:</Badge></a>
-
-          <h2 style={{ marginTop: "0.3em" }}>{label}</h2>
-          <p></p>
+          <Card.Text>
+            {statusBadge}
+            {" "}
+            <a target="wfo" href={`http://www.worldfloraonline.org/taxon/${item.wfoId}`}><Badge variant="secondary">{item.wfoId}</Badge></a>
+            {" "}
+            {ipniBadge}
+            {" "}
+            {editableBadge}
+          </Card.Text>
+          <Card.Text>
+            <span style={{ fontSize: "2rem", fontWeight: "500" }} >{label}</span>
+          </Card.Text>
+          <Card.Text>
+            {item.getProtologueText()}
+          </Card.Text>
         </Card.Body>
       </Card>
     );

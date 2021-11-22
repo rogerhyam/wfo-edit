@@ -121,18 +121,15 @@ class OrcidCard extends Component {
                     width="24" height="24" alt="ORCID iD icon"
                 /> Authentication</Card.Header>
                 <Card.Body>
-                    <Card.Title>ORCID Sign In Required</Card.Title>
                     <Card.Body>
+                        <Card.Title>ORCID Sign In Required</Card.Title>
                         <Card.Text>
-                            This is the classification editor for the World Flora Online.
-                            It is used by specialists to maintain a global consensus taxonomy of the worlds plants.
+                            This is the classification editor for the <a href="http://www.worldfloraonline.org/" target="wfo">World Flora Online</a>.
+                            It is used by specialists to maintain the global consensus taxonomy of worlds plants.
                         </Card.Text>
                         <Card.Text>
-                            Access to the editor tool is granted to experts based on their area of knowledge.
-                            If you have been given a group to work on please log in using the button below.
-                        </Card.Text>
-                        <Card.Text>
-                            <strong>Access to data is free and open under FAIR data sharing principles.</strong>
+                            Access to the editor tool is granted to botanists based on their area of expertise.
+                            If you have agreed to work on a group please log in using the button below.
                         </Card.Text>
                         <Card.Text>
                             <Button
@@ -151,6 +148,13 @@ class OrcidCard extends Component {
                         </Button>
                         </Card.Text>
                         <Card.Text>The button also enables the creation of a free ORCID iD if you don't have one already.</Card.Text>
+                        <Card.Title>
+                            The Data Is Open
+                        </Card.Title>
+                        <Card.Text>
+                            Access to the data is free and open under FAIR principles. FIXME: Details of access to backbones. Regular working snapshots?
+                        </Card.Text>
+
                     </Card.Body>
 
                 </Card.Body>

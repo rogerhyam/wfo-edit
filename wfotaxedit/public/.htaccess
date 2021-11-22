@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# all .php files are in the data directory
+RewriteRule ([^\.]+).php data/$1.php [END]

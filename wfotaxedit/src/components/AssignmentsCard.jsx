@@ -32,6 +32,9 @@ class AssignmentsCard extends Component {
     }
 
     render() {
+
+        if (!this.props.show) return "";
+
         return (
             <Card style={{ marginTop: "1em" }}>
                 <Card.Header>Assignments</Card.Header>

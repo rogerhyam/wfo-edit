@@ -1,5 +1,6 @@
 {
   "name": "wfotaxedit",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://127.0.0.1:3100/data",
@@ -18,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && tar -cvf ../wfo_edit_build.tar.gz -C build .",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import ItemFormAuthorsText from "./ItemFormAuthorsText";
+import ItemFormAuthorsLookup from "./ItemFormAuthorsLookup";
 
 
 class ItemFormAuthors extends Component {
@@ -20,7 +21,7 @@ class ItemFormAuthors extends Component {
                 <Card.Header>Author(s)</Card.Header>
                 <Card.Body>
                     <ItemFormAuthorsText authorsText={item.getAuthorsText()} setAuthorsText={item.setAuthorsText} />
-                    <p>FIXME: Parse string and list actual author links here.</p>
+                    <ItemFormAuthorsLookup authorsText={item.getAuthorsText()} />
                 </Card.Body>
             </Card>
         );

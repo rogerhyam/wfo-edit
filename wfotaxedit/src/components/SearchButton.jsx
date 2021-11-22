@@ -26,7 +26,7 @@ class SearchButton extends Component {
 
         return (
             <>
-                <Button variant="outline-success" onClick={this.handleShow} >Search</Button>
+                <Button variant="outline-success" onClick={this.handleShow} disabled={this.props.disabled} >Search</Button>
                 <SearchItemDialogue
                     requireStatus={[]}
                     setPickedItem={this.handleItemPicked}

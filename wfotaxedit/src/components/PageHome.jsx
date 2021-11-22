@@ -20,7 +20,10 @@ class PageHome extends Component {
                 <Row>
                     <Col>
                         <OrcidCard user={this.props.user} />
-                        <AssignmentsCard assignments={this.props.user.getAssignments()} />
+                        <AssignmentsCard
+                            assignments={this.props.user.getAssignments()}
+                            show={this.props.user.isLoggedIn()}
+                        />
                     </Col>
                 </Row>
             </Container>

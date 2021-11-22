@@ -14,7 +14,7 @@ define('ORCID_TOKEN_URI', 'https://orcid.org/oauth/token');
 if(getenv('WFO_EDIT_DEV')){
   define('ORCID_REDIRECT_URI', 'http://localhost:3000/orcid_redirect.html');
 }else{
-  define('ORCID_REDIRECT_URI', 'https://www.herbariamundi.org/orcid_redirect.html');
+  define('ORCID_REDIRECT_URI', 'https://list.worldfloraonline.org/edit/orcid_redirect.html');
 }
 
 // the login uri is constructed from variables above

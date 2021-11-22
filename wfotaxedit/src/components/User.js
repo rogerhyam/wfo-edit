@@ -61,7 +61,7 @@ class User {
     }
 
     getAssignments = () => {
-        return this.data.assignments;
+        return this.data ? this.data.assignments : [];
     }
 
 }

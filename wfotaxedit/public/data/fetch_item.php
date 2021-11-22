@@ -31,7 +31,11 @@ $item['synonyms'] = get_synonyms($item);
 
 
 // we can edit everything below an assigned taxon
+<<<<<<< HEAD
 if(@$_SESSION['user_id']){
+=======
+if($_SESSION['user_id']){
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
     $assignments = get_assignments($_SESSION['user_id']);
 }else{
     $assignments = array();

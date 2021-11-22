@@ -32,9 +32,12 @@ class AssignmentsCard extends Component {
     }
 
     render() {
+<<<<<<< HEAD
 
         if (!this.props.show) return "";
 
+=======
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
         return (
             <Card style={{ marginTop: "1em" }}>
                 <Card.Header>Assignments</Card.Header>

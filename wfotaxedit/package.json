@@ -1,6 +1,9 @@
 {
   "name": "wfotaxedit",
+<<<<<<< HEAD
   "homepage": ".",
+=======
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
   "version": "0.1.0",
   "private": true,
   "proxy": "http://127.0.0.1:3100/data",
@@ -19,7 +22,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+<<<<<<< HEAD
     "build": "react-scripts build && tar -cvf ../wfo_edit_build.tar.gz -C build .",
+=======
+    "build": "react-scripts build",
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

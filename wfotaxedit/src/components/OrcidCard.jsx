@@ -121,6 +121,7 @@ class OrcidCard extends Component {
                     width="24" height="24" alt="ORCID iD icon"
                 /> Authentication</Card.Header>
                 <Card.Body>
+<<<<<<< HEAD
                     <Card.Body>
                         <Card.Title>ORCID Sign In Required</Card.Title>
                         <Card.Text>
@@ -130,6 +131,20 @@ class OrcidCard extends Component {
                         <Card.Text>
                             Access to the editor tool is granted to botanists based on their area of expertise.
                             If you have agreed to work on a group please log in using the button below.
+=======
+                    <Card.Title>ORCID Sign In Required</Card.Title>
+                    <Card.Body>
+                        <Card.Text>
+                            This is the classification editor for the World Flora Online.
+                            It is used by specialists to maintain a global consensus taxonomy of the worlds plants.
+                        </Card.Text>
+                        <Card.Text>
+                            Access to the editor tool is granted to experts based on their area of knowledge.
+                            If you have been given a group to work on please log in using the button below.
+                        </Card.Text>
+                        <Card.Text>
+                            <strong>Access to data is free and open under FAIR data sharing principles.</strong>
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
                         </Card.Text>
                         <Card.Text>
                             <Button
@@ -148,6 +163,7 @@ class OrcidCard extends Component {
                         </Button>
                         </Card.Text>
                         <Card.Text>The button also enables the creation of a free ORCID iD if you don't have one already.</Card.Text>
+<<<<<<< HEAD
                         <Card.Title>
                             The Data Is Open
                         </Card.Title>
@@ -155,6 +171,8 @@ class OrcidCard extends Component {
                             Access to the data is free and open under FAIR principles. FIXME: Details of access to backbones. Regular working snapshots?
                         </Card.Text>
 
+=======
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
                     </Card.Body>
 
                 </Card.Body>

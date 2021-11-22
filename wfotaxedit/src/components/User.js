@@ -61,7 +61,11 @@ class User {
     }
 
     getAssignments = () => {
+<<<<<<< HEAD
         return this.data ? this.data.assignments : [];
+=======
+        return this.data.assignments;
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
     }
 
 }

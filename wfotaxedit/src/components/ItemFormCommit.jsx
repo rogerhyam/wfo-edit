@@ -19,7 +19,11 @@ class ItemFormCommit extends Component {
             window.scrollTo(0, 0);
             // FIXME - SAVE Confirmation
         } else {
+<<<<<<< HEAD
             // FIXME - ERROR Confirmations
+=======
+            // FIXME - ERROR Confirmation
+>>>>>>> ec37c1a271fdb4e7e52703ce44d2e509035fa5ae
         }
 
     }
